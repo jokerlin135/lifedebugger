@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Debugger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ['"JetBrains Mono"', 'monospace'],
+              sans: ['"Inter"', 'sans-serif'],
+            },
+            colors: {
+              dark: {
+                900: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+              },
+              neon: {
+                green: '#10b981',
+                purple: '#8b5cf6',
+                pink: '#ec4899',
+                yellow: '#eab308'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e293b; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #475569; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b; 
+      }
+
+      /* Print Styles - A4 Optimization (Visibility Strategy v2.3) */
+      @media print {
+        @page {
+          size: A4;
+          margin: 1cm;
+        }
+        
+        /* 1. CRITICAL: Reset layout constraints that break printing in SPAs */
+        html, body, #root, .app-layout, main, .page-container {
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+          position: static !important;
+          display: block !important;
+          background-color: white !important;
+        }
+
+        /* 2. Hide everything by default using visibility */
+        body * {
+          visibility: hidden;
+        }
+
+        /* 3. Make the printable content visible */
+        .printable-content, .printable-content * {
+          visibility: visible;
+        }
+
+        /* 4. Position the printable content absolutely to capture full scroll height */
+        /* NOTE: 'fixed' breaks multi-page printing, 'absolute' works best */
+        .printable-content {
+          position: absolute !important;
+          left: 0 !important;
+          top: 0 !important;
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background: white !important;
+          color: black !important;
+          z-index: 99999 !important;
+          box-shadow: none !important;
+        }
+
+        /* 5. Formatting resets */
+        a {
+          text-decoration: underline;
+          color: black !important;
+        }
+
+        /* Force hide elements explicitly marked as no-print */
+        .no-print, .sidebar-container, button, .toast-notification {
+          display: none !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1/dist/jspdf.es.min.js",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
